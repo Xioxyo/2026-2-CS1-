@@ -76,5 +76,46 @@ public class ServicioMatricula {
     public void registrarNota(String codigoAlumno,String codigoPeriodo,String codigoCurso,int calificacion) {
     Matricula matricula = buscarMatricula(codigoAlumno, codigoPeriodo, codigoCurso);
     matricula.registrarNota(calificacion);}
+        public List<Matricula> listarPorPeriodo(String codigoPeriodo) {
+    // Comprueba que el período esté registrado.
+    servicioPeriodo.buscarPorCodigo(codigoPeriodo);
+
+    List<Matricula> resultado = new ArrayList<>();
+
+    // Selecciona las matrículas del período solicitado.
+    for (Matricula matricula : matriculas) {
+        if (matricula.codigoPeriodo().equals(codigoPeriodo)) {
+            resultado.add(matricula);
+        }
+    }
+
+    return List.copyOf(resultado);
+    }
+    public List<Matricula> verHistorial(String codigoAlumno) {
+    // Comprueba que el alumno esté registrado.
+    servicioAlumno.buscarPorCodigo(codigoAlumno);
+
+    List<Matricula> resultado = new ArrayList<>();
+
+    // Selecciona todas las matrículas de ese alumno.
+    for (Matricula matricula : matriculas) {
+        if (matricula.codigoAlumno().equals(codigoAlumno)) {
+            resultado.add(matricula);
+        }
+    }
+
+    return List.copyOf(resultado);}
+    
+    public double verPromedio(
+        String codigoAlumno,
+        String codigoPeriodo,
+        String codigoCurso) {
+
+    // Utiliza la búsqueda que agregamos al registrar notas.
+    Matricula matricula = buscarMatricula(codigoAlumno, codigoPeriodo, codigoCurso);
+
+    return matricula.promedio();
+}
     
 }
+    
