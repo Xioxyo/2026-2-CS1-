@@ -1,0 +1,1 @@
+Creé un entorno virtual .venv porque mi terminal utilizaba el Python de MSYS2, que bloqueaba la instalación directa de paquetes con pip.
